@@ -1,0 +1,51 @@
+sequelize 
+mysql2
+
+
+sql variation - mysql,postgresql,sqlite 
+
+user -> users
+blog -> blogs 
+string -> a-z , A-Z 
+
+user 
+username,
+email,
+password
+
+
+
+req.body = { title: 'hello', subtitle: 'hello', description: 'hello' }
+
+const title = req.body.title
+const subtitle = req.body.subtitle
+const description req.body.description
+
+const {title,subtitle,description} = req.body
+
+
+
+SQL(RAW QUERY)
+INSERT INTO BLOGS(title,subtitle,description) VALUES('hello','hello','hello')
+SELECT * FROM BLOGS
+DELETE FROM BLOGS WHERE ID = ? 
+
+SEQUELIZE(ORM)
+SELECT * FROM BLOGS  => BLOGS.find()
+INSERT INTO BLOGS(title,subtitle,description) VALUES('hello','hello','hello') = BLOGS.create({title:"hello",subtitle:'hello'})
+
+halnuy-> create
+
+
+
+
+
+
+
+
+
+
+
+
+
+
