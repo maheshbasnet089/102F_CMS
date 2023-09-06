@@ -1,6 +1,11 @@
 const express = require('express')
 const app = express()
 
+
+
+// database connection 
+require("./model/index")
+
 // telling the nodejs to set view-engine to ejs
 app.set('view engine','ejs')
 
@@ -21,7 +26,7 @@ app.get("/createBlog",(req,res)=>{
 
 //createBlog Post
 app.post("/createBlog",(req,res)=>{
-    console.log(req.body.description)
+    console.log(req.body)
     res.send("form submitted sucessfully")
 })
 
