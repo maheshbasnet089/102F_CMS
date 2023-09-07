@@ -19,7 +19,6 @@ app.use(express.urlencoded({extended:true}))
 app.get("/",async (req,res)=>{
     //blogs vanney table bata vayejati sabai data dey vaneko 
     const allBlogs = await blogs.findAll() 
-   
 
     // blogs vanney key/name ma allBlogs/data pass gareko ejs file lai
     res.render('blogs',{blogs:allBlogs})

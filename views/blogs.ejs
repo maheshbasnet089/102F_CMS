@@ -74,13 +74,21 @@
     </header>
 
     <div class="container">
-      <%  blogs.forEach((blog)=>{ %>
-        <div class="card">
-            <h2><%- blog.title  %></h2>
-            <h3><%- blog.subTitle %></h3>
-            <p><%- blog.description %></p>
-        </div>
-<%       }) %>
+
+      <%  if(blogs.length == 0){ %>
+        <h1>No Blogs</h1>
+
+      <%  }else{ %>
+            <% blogs.forEach((blog)=>{ %>
+                <div class="card">
+                    <h2><%- blog.title  %></h2>
+                    <h3><%- blog.subTitle %></h3>
+                    <p><%- blog.description %></p>
+                </div>
+        <%       }) %>
+        
+        <% } %>
+
 
      
     </div>
