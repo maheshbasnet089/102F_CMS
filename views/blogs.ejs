@@ -74,23 +74,15 @@
     </header>
 
     <div class="container">
+      <% blogs.length > 0 && blogs.forEach((blog)=>{ %>
         <div class="card">
-            <h2>Card 1</h2>
-            <h3>Subtitle 1</h3>
-            <p>Description for Card 1 goes here.</p>
+            <h2><%- blog.title  %></h2>
+            <h3><%- blog.subTitle %></h3>
+            <p><%- blog.description %></p>
         </div>
+<%       }) %>
 
-        <div class="card">
-            <h2>Card 2</h2>
-            <h3>Subtitle 2</h3>
-            <p>Description for Card 2 goes here.</p>
-        </div>
-
-        <div class="card">
-            <h2>Card 3</h2>
-            <h3>Subtitle 3</h3>
-            <p>Description for Card 3 goes here.</p>
-        </div>
+     
     </div>
 </body>
 </html>

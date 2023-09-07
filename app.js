@@ -16,8 +16,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 // allBlog
-app.get("/",(req,res)=>{
-    res.render('blogs')
+app.get("/",async (req,res)=>{
+    //blogs vanney table bata vayejati sabai data dey vaneko 
+    const allBlogs = await blogs.findAll() 
+   
+
+    // blogs vanney key/name ma allBlogs/data pass gareko ejs file lai
+    res.render('blogs',{blogs:allBlogs})
 })
 
 //createBlog
@@ -42,11 +47,11 @@ app.post("/createBlog",async (req,res)=>{
         subTitle:subTitle,
         description : description
     })
-
-
-
-    res.send("form submitted sucessfully")
+    res.redirect("/")
 })
+
+// database/table bata data kasari nikalney 
+
 
 app.listen(3000,()=>{
     console.log("NodeJs project has started at port 3000")
