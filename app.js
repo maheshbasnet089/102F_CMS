@@ -51,7 +51,7 @@ app.post("/createBlog",async (req,res)=>{
 
 // single blog page 
 app.get("/single/:id",async(req,res)=>{
-const id =     req.params.id
+const id = req.params.id
 // second approach
 // const {id} = req.params 
 // id ko data magnu/find garnu paryo hamro table bata

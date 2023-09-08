@@ -83,7 +83,7 @@
                 <div class="card">
                     <h2><%- blog.title  %></h2>
                     <h3><%- blog.subTitle %></h3>
-                    <p><%- blog.description %></p>
+                    <p><%- blog.description.slice(0,100) %>...</p>
                     <a href="/single/<%-blog.id %>">Read More</a>
                 </div>
         <%       }) %>
