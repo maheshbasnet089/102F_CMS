@@ -49,7 +49,10 @@ app.post("/createBlog",async (req,res)=>{
     res.redirect("/")
 })
 
-// database/table bata data kasari nikalney 
+// single blog page 
+app.get("/single/:id",(req,res)=>{
+    res.render("singleBlog.ejs")
+})
 
 
 app.listen(3000,()=>{
