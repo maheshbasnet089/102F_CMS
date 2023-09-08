@@ -50,8 +50,20 @@ app.post("/createBlog",async (req,res)=>{
 })
 
 // single blog page 
-app.get("/single/:id",(req,res)=>{
-    res.render("singleBlog.ejs")
+app.get("/single/:id",async(req,res)=>{
+const id =     req.params.id
+// second approach
+// const {id} = req.params 
+// id ko data magnu/find garnu paryo hamro table bata
+const blog =  await blogs.findAll({
+    where : {
+        id : id
+    }
+})
+// second finding approach
+// const blog = await blogs.findByPk(id)
+
+    res.render("singleBlog",{blog:blog})
 })
 
 

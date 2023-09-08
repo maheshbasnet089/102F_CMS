@@ -69,18 +69,17 @@
     <div class="container">
         <div class="author-info">
      
-            <div class="author-name">Title</div>
+            <div class="author-name"><%- blog[0].title  %></div>
         </div>
-        <div class="author-name">SubTitle</div>
+        <div class="author-name"><%- blog[0].subTitle  %></div>
 
         <div class="post-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae metus sed orci bibendum tincidunt. Duis sodales massa nec tellus facilisis eleifend. Vivamus nec ipsum vel sapien eleifend auctor eu id ipsum. Sed ut tristique libero. Nam vitae tortor feugiat, bibendum eros nec, ultricies libero. Fusce vel urna euismod, dignissim odio at, congue orci. Sed vel odio id lorem venenatis viverra. Fusce id velit non purus facilisis dignissim. Donec ut enim vel dolor blandit malesuada. Sed nec cursus orci. Nullam vulputate leo quis nisi laoreet, sit amet aliquam elit luctus.</p>
+            <p><%- blog[0].description %></p>
 
-            <p>Integer gravida, libero ac faucibus sodales, felis dolor aliquam justo, sed mattis odio ligula a justo. Nullam vel semper lectus. Aliquam erat volutpat. Sed euismod quam id laoreet laoreet. Vivamus id eleifend sapien. Praesent dictum, velit eget laoreet sagittis, neque felis finibus ex, a accumsan arcu lectus ut metus. Nulla facilisi. Nulla nec velit ac erat auctor fermentum vel id justo. Sed et lectus non tellus vulputate vestibulum a nec nunc.</p>
         </div>
 
         <div class="post-footer">
-            Published on September 5, 2023
+            Published on <%- blog[0].createdAt.toISOString().slice(0,10) %>
         </div>
     </div>
 </body>
