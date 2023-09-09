@@ -1,5 +1,6 @@
 const express = require('express')
-const { blogs } = require('./model/index')
+const { blogs, sequelize } = require('./model/index')
+const { QueryTypes } = require('sequelize')
 const app = express()
 
 
@@ -75,6 +76,10 @@ app.get("/delete/:id",async (req,res)=>{
             id : id
         }
     })
+//    await  sequelize.query('DELETE FROM blogs WHERE id=?',{
+//         replacements  : [id],
+//         type : QueryTypes.DELETE
+//     })
    res.redirect("/")
 })
 
