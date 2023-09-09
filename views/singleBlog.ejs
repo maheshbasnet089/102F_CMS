@@ -81,6 +81,7 @@
         <div class="post-footer">
             Published on <%- blog[0].createdAt.toISOString().slice(0,10) %>
         </div>
+        <button><a href="/delete/<%-blog[0].id %>">Delete</a></button>
     </div>
 </body>
 </html>

@@ -66,6 +66,18 @@ const blog =  await blogs.findAll({
     res.render("singleBlog",{blog:blog})
 })
 
+// delete page 
+app.get("/delete/:id",async (req,res)=>{
+    const id = req.params.id
+    // blogs vanney table bata tyo id ko delete gar vaneko yaha
+     await blogs.destroy({
+        where : {
+            id : id
+        }
+    })
+   res.redirect("/")
+})
+
 
 app.listen(3000,()=>{
     console.log("NodeJs project has started at port 3000")
