@@ -84,6 +84,46 @@ app.get("/delete/:id",async (req,res)=>{
 })
 
 
+// EDIT BLOG
+app.get("/edit/:id", async (req,res)=>{
+    const id = req.params.id
+    // find blog of that id 
+const blog =    await  blogs.findAll({
+        where : {
+            id : id
+        }
+    })
+
+    res.render("editBlog",{blog : blog})
+})
+
+app.post("/editBlog/:id",async (req,res)=>{
+    const id = req.params.id
+    const title = req.body.title
+    const subTitle = req.body.subtitle
+    const description = req.body.description
+
+    // first approach 
+    // await  blogs.update(req.body,{
+    //     where :{
+    //         id : id
+    //     }
+    // })
+
+    // second approach 
+    await blogs.update({
+        title : title,
+        subTitle : subTitle,
+        description : description
+    },{
+        where : {
+            id : id
+        }
+    })
+
+    res.redirect("/single/" + id)
+})
+
 app.listen(3000,()=>{
     console.log("NodeJs project has started at port 3000")
 })
