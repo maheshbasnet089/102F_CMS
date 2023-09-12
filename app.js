@@ -20,6 +20,20 @@ app.use(express.static("hello/"))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+app.get("/portfolio",(req,res)=>{
+    const myData = [
+        {
+            name : "Manish Basnet",
+            whoami : "student"
+        }
+    ]
+    res.render("index.ejs",{myData:myData})
+})
+
+app.get("/components",(req,res)=>{
+    res.render("components")
+})
+
 // allBlog
 app.get("/",async (req,res)=>{
     //blogs vanney table bata vayejati sabai data dey vaneko 
