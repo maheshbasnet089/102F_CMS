@@ -13,26 +13,14 @@ app.set('view engine','ejs')
 
 // nodejs lai  file access garna dey vaneko hae yo code lay 
 app.use(express.static("public/"))
-app.use(express.static("hello/"))
 
 
 // form bata data aairaxa parse gara or handle gar vaneko ho
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-app.get("/portfolio",(req,res)=>{
-    const myData = [
-        {
-            name : "Manish Basnet",
-            whoami : "student"
-        }
-    ]
-    res.render("index.ejs",{myData:myData})
-})
 
-app.get("/components",(req,res)=>{
-    res.render("components")
-})
+
 
 // allBlog
 app.get("/",async (req,res)=>{
