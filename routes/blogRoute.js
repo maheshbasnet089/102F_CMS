@@ -16,5 +16,7 @@ router.route("/edit/:id").get(renderEditBlog)
 // you can do this as well 
 // router.route("/:id").get(singleBlog).post(editBlog)
 
+// router.route("/:id").get().post().patch().delete()
+
 
 module.exports = router;

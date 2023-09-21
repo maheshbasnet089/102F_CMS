@@ -1,13 +1,8 @@
 const express = require('express')
-const { blogs, sequelize } = require('./model/index')
-const { QueryTypes } = require('sequelize')
-const { renderCreateBlog, createBlog, allBlog, singleBlog, deleteBlog, renderEditBlog, editBlog } = require('./controller/blog/blogController')
 const app = express()
-
 
 //ROUTES HERE 
 const blogRoute = require("./routes/blogRoute")
-
 
 // database connection 
 require("./model/index")
@@ -17,7 +12,6 @@ app.set('view engine','ejs')
 
 // nodejs lai  file access garna dey vaneko hae yo code lay 
 app.use(express.static("public/"))
-
 
 // form bata data aairaxa parse gara or handle gar vaneko ho
 app.use(express.json())
