@@ -3,6 +3,7 @@ const app = express()
 
 //ROUTES HERE 
 const blogRoute = require("./routes/blogRoute")
+const authRoute = require("./routes/authRoute")
 
 // database connection 
 require("./model/index")
@@ -18,9 +19,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 
-
 app.use("",blogRoute) // localhost:3000 + /createBlog === localhost:3000/createBlog
-
+app.use("",authRoute) //localhost:3000/register
 
 
 

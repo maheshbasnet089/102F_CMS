@@ -13,6 +13,9 @@ router.route("/delete/:id").get(deleteBlog)
 router.route("/editBlog/:id").post(editBlog)
 router.route("/edit/:id").get(renderEditBlog)
 
+
+
+
 // you can do this as well 
 // router.route("/:id").get(singleBlog).post(editBlog)
 

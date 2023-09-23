@@ -1,0 +1,12 @@
+MVC pattern 
+NodeJs -> MVCR(Model,View,Controller,Route)
+View - > Ejs file 
+Router - routes/path/api
+Controller -> CRUD operation gareko code/ function haru 
+Model = table related kura haru / database related kura
+
+alt + shift + up/down arrow - shortcut for copy/paste line in vscode
+ctrl + space -> auto import suggestion
+ctrl + click -> to navigate to that code/function
+
+
