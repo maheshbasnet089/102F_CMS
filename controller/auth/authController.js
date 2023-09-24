@@ -40,6 +40,35 @@ exports.renderLoginForm = (req,res)=>{
     res.render("login")
 }
 
-exports.loginUser = (req,res)=>{
+exports.loginUser = async (req,res)=>{
     console.log(req.body)
+    const {email,password}= req.body
+    // SERVER SIDE VALIDATION 
+    if(!email || !password){
+        return res.send("Email and password are required")
+    }
+
+    // check if that email exists or not
+   const associatedDataWithEmail =  await users.findAll({
+       where : {
+        email
+       }
+    })
+    if(associatedDataWithEmail.length == 0){
+         res.send("User with that email doesn't exists")
+    }else{
+          // check if password also matches
+    const associatedEmailPassword = associatedDataWithEmail[0].password
+       const isMatched =  bcrypt.compareSync(password,associatedEmailPassword) // true or false return
+       if(isMatched){
+        res.send("Logged In success")
+       }else{
+        res.send("Invalid password")
+       }
+
+    }
+
+
+    // exist xaina vaney - > [],xa vaney [{name:"",password:"",email}]
+
 }
