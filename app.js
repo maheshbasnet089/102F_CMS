@@ -28,3 +28,6 @@ app.use("",authRoute) //localhost:3000/register
 app.listen(3000,()=>{
     console.log("NodeJs project has started at port 3000")
 })
+
+// to clear git cached 
+// git rm -r --cached node_modules(folderName)
