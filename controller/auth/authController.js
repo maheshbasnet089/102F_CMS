@@ -1,5 +1,6 @@
 const { users } = require("../../model")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 exports.renderRegisterForm = (req,res)=>{
     res.render("register")
@@ -41,7 +42,7 @@ exports.renderLoginForm = (req,res)=>{
 }
 
 exports.loginUser = async (req,res)=>{
-    console.log(req.body)
+   
     const {email,password}= req.body
     // SERVER SIDE VALIDATION 
     if(!email || !password){
@@ -62,14 +63,19 @@ exports.loginUser = async (req,res)=>{
     const associatedEmailPassword = associatedDataWithEmail[0].password
        const isMatched =  bcrypt.compareSync(password,associatedEmailPassword) // true or false return
        if(isMatched){
+        // GENERATE TOKEN HERE 
+
+        const token = jwt.sign({id:associatedDataWithEmail[0].id},process.env.SECRETKEY,{
+            expiresIn : '30d'
+        })
+        res.cookie('token',token) // browser ma application tab vitra cookie vanney ma save hunchha
+
         res.send("Logged In success")
        }else{
         res.send("Invalid password")
        }
 
     }
-
-
-    // exist xaina vaney - > [],xa vaney [{name:"",password:"",email}]
+    // exist xaina vaney - > [],xa vaney [{name:"",password:"",email:"",id:""}]
 
 }

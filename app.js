@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+require('dotenv').config() // requiring dotenv and initiliazing it with default configuration 
 
 //ROUTES HERE 
 const blogRoute = require("./routes/blogRoute")
