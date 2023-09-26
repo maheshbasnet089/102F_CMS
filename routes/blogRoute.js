@@ -1,4 +1,5 @@
 const { renderCreateBlog, createBlog, allBlog, singleBlog, deleteBlog, editBlog, renderEditBlog } = require("../controller/blog/blogController");
+const { isAuthenticated } = require("../middleware/isAuthenticated");
 
 const router = require("express").Router()
 
@@ -7,7 +8,7 @@ const router = require("express").Router()
 // app.post("/createBlog",createBlog)
 
 router.route("/").get(allBlog)
-router.route("/createBlog").get(renderCreateBlog).post(createBlog)
+router.route("/createBlog").get(renderCreateBlog).post(isAuthenticated, createBlog)
 router.route("/single/:id").get(singleBlog)
 router.route("/delete/:id").get(deleteBlog)
 router.route("/editBlog/:id").post(editBlog)
