@@ -16,7 +16,7 @@
         <!-- <img src="images/tapShareLogo.jpg" alt="" srcset=""> -->
 
    
-              <% myBlogs.forEach((blog)=>{ %>
+              <%myBlogs.length > 0 && myBlogs.forEach((blog)=>{ %>
 
                 <div class="card">
                     <h2><%- blog.title %></h2>
