@@ -49,7 +49,7 @@ exports.loginUser = async (req,res)=>{
         return res.send("Email and password are required")
     }
 
-   
+//    findByPk -> {} ,findAll -> [{}]
     // check if that email exists or not
    const associatedDataWithEmail =  await users.findAll({
        where : {

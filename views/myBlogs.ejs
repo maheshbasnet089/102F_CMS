@@ -10,25 +10,23 @@
 <body>
 
     <%- include("components/navbar")  %>
+    <h1>My Blogs</h1>
 
     <div class="container">
         <!-- <img src="images/tapShareLogo.jpg" alt="" srcset=""> -->
 
-      <%  if(blogs.length == 0){ %>
-        <h1>No Blogs</h1>
+   
+              <% myBlogs.forEach((blog)=>{ %>
 
-      <%  }else{ %>
-            <% blogs.forEach((blog)=>{ %>
                 <div class="card">
-                    <h2><%- blog.title  %></h2>
+                    <h2><%- blog.title %></h2>
                     <h3><%- blog.subTitle %></h3>
-                    <p><%- blog.description.slice(0,100) %>...</p>
+                    <p><%- blog.description %></p>
          
                     <a href="/single/<%-blog.id %>">Read More</a>
                 </div>
-        <%       }) %>
-        
-        <% } %>
+
+              <% }) %>
 
 
      
