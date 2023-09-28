@@ -15,6 +15,7 @@ app.set('view engine','ejs')
 
 // nodejs lai  file access garna dey vaneko hae yo code lay 
 app.use(express.static("public/"))
+app.use(express.static("uploads/"))
 
 app.use(cookieParser())
 // form bata data aairaxa parse gara or handle gar vaneko ho
