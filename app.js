@@ -23,6 +23,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 
+app.use((req,res,next)=>{
+    res.locals.currentUser = req.cookies.token
+    next()
+})
+
+
 app.use("",blogRoute) // localhost:3000 + /createBlog === localhost:3000/createBlog
 app.use("",authRoute) //localhost:3000/register
 

@@ -1,10 +1,17 @@
 <header>
     <h1><a href="/" style="color:white"> CMS 102</a></h1>
     <nav>
-        <a href="/createBlog">Add Blog</a>
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
-        <a href="/myblogs">My Blogs</a>
+       <% if(currentUser){ %>
+
+            <a href="/createBlog">Add Blog</a>
+            <a href="/myblogs">My Blogs</a>
+        <a href="/logout">Logout</a>
+
+      <%  }else{ %>
+
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+       <% } %>
  
 
       
