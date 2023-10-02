@@ -100,15 +100,19 @@ const blog =    await  blogs.findAll({
 }
 
 exports.editBlog = async (req,res)=>{
+    // const userId = req.userId
     const id = req.params.id
     const title = req.body.title
     const subTitle = req.body.subtitle
     const description = req.body.description
-    const oldDatas = await blogs.findAll({
-        where : {
-            id : id
-        }
-    })
+    // const oldDatas = await blogs.findAll({
+    //     where : {
+    //         id : id
+    //     }
+    // })
+    // if(oldDatas[0].userId !== userId){
+    //     return res.send("You cannot edit This blog")
+    // }
     let fileUrl;
     if(req.file){
         fileUrl = process.env.PROJECT_URL + req.file.filename
