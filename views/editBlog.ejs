@@ -71,7 +71,7 @@
 
     <div class="container">
         <h2>Submit Your Information</h2>
-        <form action="/editBlog/<%- blog[0].id %>" method="post">
+        <form action="/editBlog/<%- blog[0].id %>" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" value="<%- blog[0].title %>" id="title" name="title" required>
@@ -85,6 +85,10 @@
                 <textarea  id="description" name="description" rows="4" required>
                     <%- blog[0].description %>
                 </textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">image:</label>
+                <input type="file" id="image" name="image"  >
             </div>
             <button type="submit">Submit</button>
             <button > <a href="/single/<%-blog[0].id %>">Cancel</a></button>
