@@ -108,14 +108,62 @@ exports.checkForgotPassword = async (req,res)=>{
     if(emailExists.length == 0){
         res.send("User with that email doesn't exist")
     }else{
+        const generatedOtp = Math.floor(10000 * Math.random(9999))
+        console.log(generatedOtp)
         // tyo email ma otp pathauney
       await  sendEmail({
             email : email,
             subject : "Forgot Password OTP",
-            otp : 1234
+            otp : generatedOtp
         })
+        emailExists[0].otp = generatedOtp
+        emailExists[0].otpGeneratedTime = Date.now()
+        await emailExists[0].save()
 
-        res.send("Email sent successfully")
+        res.redirect("/otp?email=" + email)
 
     }
+}
+
+
+exports.renderOtpForm = (req,res)=>{
+    const email = req.query.email 
+
+    res.render("otpForm",{email : email})
+}
+
+exports.handleOTP = async (req,res)=>{
+    const otp = req.body.otp
+    const email = req.params.id
+    if(!otp || !email){
+        return res.send("Please send email,otp")
+    }
+   const userData = await users.findAll({
+        where :{
+            email : email,
+            otp : otp
+        }
+    })
+    if(userData.length ==0){
+        res.send("Invalid Otp")
+    }else{
+       const currentTime = Date.now()  // current time
+       const otpGeneratedTime = userData[0].otpGeneratedTime // past time
+   
+       if(currentTime - otpGeneratedTime <= 120000){
+        userData[0].otp = null 
+        userData[0].otpGeneratedTime = null
+        await userData[0].save()
+
+        res.redirect("/passwordChange")
+       }else{
+        res.send("Otp has expired")
+       }
+    }
+
+}
+
+
+exports.renderPasswordChangeForm = (req,res)=>{
+    res.render("passwordChangeForm")
 }
