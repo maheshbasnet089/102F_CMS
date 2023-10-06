@@ -203,9 +203,8 @@ exports.handlePasswordChange = async(req,res)=>{
     }
     const currentTime = Date.now()
     const otpGeneratedTime = userData[0].otpGeneratedTime 
-    console.log(currentTime,otpGeneratedTime,currentTime-otpGeneratedTime)
-    console.log(currentTime - otpGeneratedTime >= 120000)
-    if(currentTime - otpGeneratedTime >= 6000){
+
+    if(currentTime - otpGeneratedTime >= 120000){
     
         return res.redirect("/forgotPassword")
     }
