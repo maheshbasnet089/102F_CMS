@@ -1,4 +1,4 @@
-const { renderRegisterForm, registerUser, renderLoginForm, loginUser, logOut, forgotPassword, checkForgotPassword, renderOtpForm, handleOTP, renderPasswordChangeForm } = require("../controller/auth/authController");
+const { renderRegisterForm, registerUser, renderLoginForm, loginUser, logOut, forgotPassword, checkForgotPassword, renderOtpForm, handleOTP, renderPasswordChangeForm, handlePasswordChange } = require("../controller/auth/authController");
 
 const router = require("express").Router()
 
@@ -18,6 +18,7 @@ router.route("/otp").get(renderOtpForm)
 router.route("/otp/:id").post(handleOTP)
 
 router.route("/passwordChange").get(renderPasswordChangeForm)
+router.route("/passwordChange/:email/:otp").post(handlePasswordChange)
 
 module.exports = router;
 
