@@ -39,7 +39,8 @@ exports.registerUser = async(req,res)=>{
 // LOGIN Starts from here
 
 exports.renderLoginForm = (req,res)=>{
-    res.render("login")
+   const error =  req.flash("error")
+    res.render("login",{error })
 }
 
 exports.loginUser = async (req,res)=>{
@@ -71,9 +72,11 @@ exports.loginUser = async (req,res)=>{
         })
         res.cookie('token',token) // browser ma application tab vitra cookie vanney ma save hunchha
 
-        res.send("Logged In success")
+        req.flash("success","Logged In Successfully")
+        res.redirect("/")
        }else{
-        res.send("Invalid password")
+        req.flash("error","Invalid Password")
+        res.redirect("/login")
        }
 
     }

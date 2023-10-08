@@ -40,12 +40,13 @@ res.redirect("/")
 }
 
 exports.allBlog = async (req,res)=>{
+    const success = req.flash("success")
     //blogs vanney table bata vayejati sabai data dey vaneko 
     const allBlogs = await blogs.findAll() 
 
 
     // blogs vanney key/name ma allBlogs/data pass gareko ejs file lai
-    res.render('blogs',{blogs:allBlogs})
+    res.render('blogs',{blogs:allBlogs,success })
     // res.json({
     //     status : 200,
     //     blogs : allBlogs

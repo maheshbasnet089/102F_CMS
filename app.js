@@ -3,6 +3,11 @@ const app = express()
 require('dotenv').config() // requiring dotenv and initiliazing it with default configuration 
 const cookieParser = require('cookie-parser')
 
+// require express-session and connect-flash
+const session = require("express-session")
+const flash = require("connect-flash")
+
+
 //ROUTES HERE 
 const blogRoute = require("./routes/blogRoute")
 const authRoute = require("./routes/authRoute")
@@ -10,6 +15,15 @@ const { decodeToken } = require('./services/decodeToken')
 
 // database connection 
 require("./model/index")
+
+
+app.use(session({
+    secret : "helloworld",
+    resave : false,
+    saveUninitialized : false
+}))
+
+app.use(flash())
 
 // telling the nodejs to set view-engine to ejs
 app.set('view engine','ejs')
