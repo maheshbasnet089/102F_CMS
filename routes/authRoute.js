@@ -1,17 +1,18 @@
 const { renderRegisterForm, registerUser, renderLoginForm, loginUser, logOut, forgotPassword, checkForgotPassword, renderOtpForm, handleOTP, renderPasswordChangeForm, handlePasswordChange } = require("../controller/auth/authController");
+const catchError = require("../services/catchError");
 
 const router = require("express").Router()
 
 // app.get("/register",registerUser)
 // app.post("/register",registerUser)
 
-router.route("/register").get(renderRegisterForm).post(registerUser)
+router.route("/register").get(renderRegisterForm).post(catchError(registerUser) )
 
-router.route("/login").get(renderLoginForm).post(loginUser)
+router.route("/login").get(renderLoginForm).post(catchError(loginUser))
 
-router.route("/logout").get(logOut)
+router.route("/logout").get(catchError(logOut))
 
-router.route("/forgotPassword").get(forgotPassword).post(checkForgotPassword)
+router.route("/forgotPassword").get(catchError(forgotPassword)).post(catchError(checkForgotPassword))
 
 router.route("/otp").get(renderOtpForm)
 

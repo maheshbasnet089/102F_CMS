@@ -113,6 +113,7 @@
     <%- include("components/navbar.ejs") %>
     <div class="container">
         <h2>Registration Form</h2>
+        <%- error %>
         <form action="/register" method="post">
             <div class="form-group">
                 <label for="email">Email:</label>

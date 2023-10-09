@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken")
 const sendEmail = require("../../services/sendEmail")
 
 exports.renderRegisterForm = (req,res)=>{
-    res.render("register")
+    const error = req.flash("error")
+    res.render("register",{error})
 }
 // Alternative to arrow function 
 // exports.registerUser = function(req,res){
@@ -12,35 +13,43 @@ exports.renderRegisterForm = (req,res)=>{
 // }
 
 exports.registerUser = async(req,res)=>{
-   const {email,username,password,confirmPassword} = req.body
-   /*const email = req.body.email
-   const password = req.body.password
-   const username  = req.body.password*/
 
-    // check if password matches with confirmPassword
-    // if(password.toLowerCase() !== confirmPassword.toLowerCase()){
-    //     return res.send("Password and confirmPassword doesn't matched")
-    // }
-    if(password !== confirmPassword){
-         res.send("Password and confirmPassword doesn't matched")
-         return
-    }
+    const {email,username,password,confirmPassword} = req.body
+    /*const email = req.body.email
+    const password = req.body.password
+    const username  = req.body.password*/
+ 
+     // check if password matches with confirmPassword
+     // if(password.toLowerCase() !== confirmPassword.toLowerCase()){
+     //     return res.send("Password and confirmPassword doesn't matched")
+     // }
+     if(password !== confirmPassword){
+          res.send("Password and confirmPassword doesn't matched")
+          return
+     }
+ 
+    // INSERT INTO Table(users)
+   await users.createsss({
+     email,
+     password : bcrypt.hashSync(password,8) ,
+     username
+    })
+    res.redirect("/login")
 
-   // INSERT INTO Table(users)
-  await users.create({
-    email,
-    password : bcrypt.hashSync(password,8) ,
-    username
-   })
-   res.redirect("/login")
+
 }
 
 
 // LOGIN Starts from here
 
 exports.renderLoginForm = (req,res)=>{
-   const error =  req.flash("error")
+    try {
+        const error =  req.flash("error")
     res.render("login",{error })
+    } catch (error) {
+        res.render("error.ejs",{error  : error.message})
+    }
+   
 }
 
 exports.loginUser = async (req,res)=>{

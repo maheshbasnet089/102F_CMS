@@ -20,7 +20,8 @@ require("./model/index")
 app.use(session({
     secret : "helloworld",
     resave : false,
-    saveUninitialized : false
+    saveUninitialized : false,
+  
 }))
 
 app.use(flash())
