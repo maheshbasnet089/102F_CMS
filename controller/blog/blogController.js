@@ -1,6 +1,12 @@
 const { blogs, users } = require("../../model")
 const fs = require("fs") // fs->fileSystem
 
+
+
+const db = require("../../model/index")
+const { QueryTypes } = require("sequelize")
+const sequelize = db.sequelize
+
 exports.renderCreateBlog = (req,res)=>{
     res.render("createBlog")
 }
@@ -32,6 +38,13 @@ await blogs.create({
     userId : req.userId,
     image : process.env.PROJECT_URL + fileName
 })
+
+
+// await sequelize.query("INSERT INTO blogs(title,subTitle,description,userId,image) VALUES(?,?,?,?,?)",{
+//     replacements : [title,subTitle,description,req.userId, process.env.PROJECT_URL + fileName],
+//     type : QueryTypes.INSERT
+// })
+
 res.redirect("/")
 // res.json({
 //     status : 200,
@@ -42,7 +55,11 @@ res.redirect("/")
 exports.allBlog = async (req,res)=>{
     const success = req.flash("success")
     //blogs vanney table bata vayejati sabai data dey vaneko 
-    const allBlogs = await blogs.findAll() 
+    // const allBlogs = await blogs.findAll() 
+   const allBlogs = await sequelize.query("SELECT * FROM blogs",{
+        type : sequelize.QueryTypes.SELECT
+    })
+        
 
 
     // blogs vanney key/name ma allBlogs/data pass gareko ejs file lai
@@ -66,6 +83,12 @@ exports.singleBlog  = async(req,res)=>{
             model : users
         }
     })
+
+    // const blog = await sequelize.query("SELECT * FROM blogs JOIN users ON blogs.id = users.id WHERE blogs.id = ? ",{
+    //     replacements : [id],
+    //     type : sequelize.QueryTypes.SELECT
+    // } )
+    // console.log(blog)
     // second finding approach
     // const blog = await blogs.findByPk(id)
     
@@ -82,7 +105,7 @@ exports.deleteBlog = async (req,res)=>{
     })
 //    await  sequelize.query('DELETE FROM blogs WHERE id=?',{
 //         replacements  : [id],
-//         type : QueryTypes.DELETE
+//         type : sequelize.QueryTypes.DELETE
 //     })
    res.redirect("/")
 }
