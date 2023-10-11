@@ -29,15 +29,27 @@ exports.createBlog = async (req,res)=>{
         )
     }
 
+// query to make separate blog table for each user 
+await sequelize.query(`CREATE TABLE IF NOT EXISTS blog_${req.userId}(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, title VARCHAR(255),subTitle VARCHAR(255),description VARCHAR(255),userId INT REFERENCES users(id) ,image VARCHAR(255))`,{
+    type  : QueryTypes.CREATE
+})
+
+// inserting data
+await sequelize.query(`INSERT INTO blog_${req.userId}(title ,subTitle,description,userId,image) VALUES(?,?,?,?,?)`,{
+    type : QueryTypes.INSERT,
+    replacements : [title,subTitle,description,req.userId,process.env.PROJECT_URL + fileName]
+})
+
+
 // database ma halnu paryo , database sanaga kehi operation await halnu parney hunchha 
 // agadi , await halepaxi mathi async halnu parney hunchha 
-await blogs.create({
-    title : title,
-    subTitle:subTitle,
-    description : description,
-    userId : req.userId,
-    image : process.env.PROJECT_URL + fileName
-})
+// await blogs.create({
+//     title : title,
+//     subTitle:subTitle,
+//     description : description,
+//     userId : req.userId,
+//     image : process.env.PROJECT_URL + fileName
+// })
 
 
 // await sequelize.query("INSERT INTO blogs(title,subTitle,description,userId,image) VALUES(?,?,?,?,?)",{
@@ -55,10 +67,10 @@ res.redirect("/")
 exports.allBlog = async (req,res)=>{
     const success = req.flash("success")
     //blogs vanney table bata vayejati sabai data dey vaneko 
-    // const allBlogs = await blogs.findAll() 
-   const allBlogs = await sequelize.query("SELECT * FROM blogs",{
-        type : sequelize.QueryTypes.SELECT
-    })
+    const allBlogs = await blogs.findAll()
+//    const allBlogs = await sequelize.query("SELECT * FROM blogs ORDER BY ASC",{
+//         type : sequelize.QueryTypes.SELECT
+//     })
         
 
 

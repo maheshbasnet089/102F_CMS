@@ -29,7 +29,7 @@ exports.registerUser = async(req,res)=>{
      }
  
     // INSERT INTO Table(users)
-   await users.createsss({
+   await users.create({
      email,
      password : bcrypt.hashSync(password,8) ,
      username
