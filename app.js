@@ -2,12 +2,18 @@ const express = require('express')
 const app = express()
 require('dotenv').config() // requiring dotenv and initiliazing it with default configuration 
 const cookieParser = require('cookie-parser')
+const sanitizeHtml = require("sanitize-html")
+const rateLimit  = require("express-rate-limit")
+const helmet = require("helmet")
+
+
+app.use(helmet())
 
 // require express-session and connect-flash
 const session = require("express-session")
 const flash = require("connect-flash")
-
-
+const html = "<strong>hello world</strong>";
+console.log(sanitizeHtml(html));
 //ROUTES HERE 
 const blogRoute = require("./routes/blogRoute")
 const authRoute = require("./routes/authRoute")
@@ -16,7 +22,13 @@ const { decodeToken } = require('./services/decodeToken')
 // database connection 
 require("./model/index")
 
+const rateLimiter = rateLimit({
+    windowMs :2 * 60 * 1000,
+    limit : 3,
+    message : "You have exceeded the requesting limit try again after 2 minutes"
+})
 
+app.use("/forgotPassword", rateLimiter)
 app.use(session({
     secret : "helloworld",
     resave : false,

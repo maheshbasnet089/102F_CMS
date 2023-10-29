@@ -6,6 +6,7 @@ const router = require("express").Router()
 const { multer, storage } = require("../middleware/multerConfig");
 const { isValidUser } = require("../middleware/validUser");
 const catchError = require("../services/catchError");
+const sanitizer = require("../services/sanitizer");
 const upload = multer({ storage: storage });
 
 
@@ -14,10 +15,10 @@ const upload = multer({ storage: storage });
 // app.post("/createBlog",createBlog)
 
 router.route("/").get(allBlog)
-router.route("/createBlog").get( catchError(isAuthenticated), catchError(renderCreateBlog)).post( isAuthenticated,upload.single('image'),createBlog)
+router.route("/createBlog").get( catchError(isAuthenticated), catchError(renderCreateBlog)).post(isAuthenticated,upload.single('image'),sanitizer,  createBlog)
 router.route("/single/:id").get(singleBlog)
 router.route("/delete/:id").get(isAuthenticated,deleteBlog)
-router.route("/editBlog/:id").post(isAuthenticated,isValidUser, upload.single('image'), editBlog)
+router.route("/editBlog/:id").post(isAuthenticated,isValidUser, upload.single('image'),sanitizer, editBlog)
 router.route("/edit/:id").get(isAuthenticated,renderEditBlog)
 router.route("/myblogs").get(isAuthenticated,renderMyBlogs)
 
