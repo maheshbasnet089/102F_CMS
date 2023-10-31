@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       otpGeneratedTime : {
         type : DataTypes.STRING,
         allowNull : true
+      },
+      role  : {
+        type : DataTypes.ENUM("user","admin"),
+        defaultValue : "user"
       }
     
     });

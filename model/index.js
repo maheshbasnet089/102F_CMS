@@ -1,3 +1,4 @@
+const seedAdmin = require("../adminSeeder");
 const dbConfig = require("../config/dbConfig");
 const { Sequelize, DataTypes } = require("sequelize");
 
@@ -16,14 +17,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   },
 });
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("CONNECTED!!");
-  })
-  .catch((err) => {
-    console.log("Error" + err);
-  });
+
 
 const db = {};
 
@@ -33,7 +27,16 @@ db.sequelize = sequelize;
 // importing model files 
 db.blogs = require("./blogModel.js")(sequelize, DataTypes);
 db.users = require("./userModel.js")(sequelize, DataTypes);
-
+sequelize
+  .authenticate()
+  .then(async () => {
+    console.log("CONNECTED!!");
+   // check if admin exists or not
+ seedAdmin(db.users)
+  })
+  .catch((err) => {
+    console.log("Error" + err);
+  });
 //RELATIONSHIPS
 
 db.users.hasMany(db.blogs)

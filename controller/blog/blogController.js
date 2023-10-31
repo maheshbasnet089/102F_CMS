@@ -1,7 +1,7 @@
 const { blogs, users } = require("../../model")
 const fs = require("fs") // fs->fileSystem
 
-
+const nodeSchedule = require("node-schedule")
 
 const db = require("../../model/index")
 const { QueryTypes } = require("sequelize")
@@ -210,3 +210,12 @@ exports.renderMyBlogs = async (req,res)=>{
 
     res.render("myBlogs.ejs",{myBlogs : myBlogs})
 }
+
+exports.renderSecret = (req,res)=>{
+    nodeSchedule.scheduleJob('* * * * *', function(){
+        // status role column update , undefined
+        console.log('The answer to life, the universe, and everything!');
+      });
+    res.send("This is secret page only accessible to admin")
+}
+

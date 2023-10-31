@@ -1,9 +1,10 @@
-const { renderCreateBlog,renderMyBlogs, createBlog, allBlog, singleBlog, deleteBlog, editBlog, renderEditBlog } = require("../controller/blog/blogController");
+const { renderCreateBlog,renderMyBlogs, createBlog, allBlog, singleBlog, deleteBlog, editBlog, renderEditBlog, renderSecret } = require("../controller/blog/blogController");
 const { isAuthenticated } = require("../middleware/isAuthenticated");
 
 const router = require("express").Router()
 
 const { multer, storage } = require("../middleware/multerConfig");
+const { restrictTo } = require("../middleware/restrictTo");
 const { isValidUser } = require("../middleware/validUser");
 const catchError = require("../services/catchError");
 const sanitizer = require("../services/sanitizer");
@@ -22,7 +23,7 @@ router.route("/editBlog/:id").post(isAuthenticated,isValidUser, upload.single('i
 router.route("/edit/:id").get(isAuthenticated,renderEditBlog)
 router.route("/myblogs").get(isAuthenticated,renderMyBlogs)
 
-
+router.route("/secret").get(isAuthenticated, restrictTo("admin","moderator"), renderSecret)
 
 // you can do this as well 
 // router.route("/:id").get(singleBlog).post(editBlog)
